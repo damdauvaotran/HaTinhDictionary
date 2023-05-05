@@ -18,29 +18,41 @@ function App() {
   }, []);
 
   const chui = () => {
-    let tiengVietHaTinh = tiengViet.toLowerCase();
-
-    const keyList = Object.keys(hatinhMap).sort((a, b) => b.length - a.length);
-    for (const key of keyList) {
-      tiengVietHaTinh = tiengVietHaTinh.replace(
-        new RegExp(`(?<=^|\\s)${key}(?=$|\\s)`, 'gu'),
-        hatinhMap[key]
-      );
-    }
-    setHaTinh(tiengVietHaTinh);
+    setHaTinh(translate(tiengViet, hatinhMap));
   };
 
   const chuiNguoc = () => {
-    let tiengVietHaTinh = hatinh.toLowerCase();
+    setTiengViet(translate(hatinh, mapNguoc));
+  };
 
-    const keyList = Object.keys(mapNguoc).sort((a, b) => b.length - a.length);
-    for (const key of keyList) {
-      tiengVietHaTinh = tiengVietHaTinh.replace(
-        new RegExp(`(?<=^|\\s)${key}(?=$|\\s)`, 'gu'),
-        mapNguoc[key]
-      );
+  const translate = (
+    str: string,
+    mapLanguage: { [key: string]: string }
+  ): string => {
+    const tiengVietHaTinh = str.toLowerCase();
+    const tiengVietHaTinhArr = tiengVietHaTinh.split(' ');
+    let unTranslatedWords = [];
+    let translatedWords = [];
+    const keyList = Object.keys(mapLanguage).sort(
+      (a, b) => b.length - a.length
+    );
+    for (const word of tiengVietHaTinhArr) {
+      unTranslatedWords.push(word);
+      const unTranslatedString = unTranslatedWords.join(' ');
+      for (const key of keyList) {
+        if (unTranslatedString.includes(key)) {
+          const translatedString = unTranslatedString.replace(
+            new RegExp(`(?<=^|\\s)${key}(?=$|\\s)`, 'gu'),
+            mapLanguage[key]
+          );
+          unTranslatedWords = [];
+          translatedWords.push(translatedString);
+          break;
+        }
+      }
     }
-    setTiengViet(tiengVietHaTinh);
+    translatedWords = [...translatedWords, ...unTranslatedWords];
+    return translatedWords.join(' ');
   };
 
   return (
@@ -70,6 +82,8 @@ function App() {
         <BiArrowFromTop />
         Dịch
       </button>
+
+      <span style={{padding: 10 }}></span>
       <button onClick={chuiNguoc}>
         <BiArrowFromBottom />
         Dịch lại
