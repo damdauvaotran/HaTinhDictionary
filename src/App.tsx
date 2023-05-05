@@ -20,11 +20,11 @@ function App() {
   const chui = () => {
     let tiengVietHaTinh = tiengViet.toLowerCase();
 
-    const keyList = Object.keys(mapNguoc).sort((a, b) => b.length - a.length);
+    const keyList = Object.keys(hatinhMap).sort((a, b) => b.length - a.length);
     for (const key of keyList) {
       tiengVietHaTinh = tiengVietHaTinh.replace(
         new RegExp(`(?<=^|\\s)${key}(?=$|\\s)`, 'gu'),
-        mapNguoc[key]
+        hatinhMap[key]
       );
     }
     setHaTinh(tiengVietHaTinh);
@@ -33,11 +33,11 @@ function App() {
   const chuiNguoc = () => {
     let tiengVietHaTinh = hatinh.toLowerCase();
 
-    const keyList = Object.keys(hatinhMap).sort((a, b) => b.length - a.length);
+    const keyList = Object.keys(mapNguoc).sort((a, b) => b.length - a.length);
     for (const key of keyList) {
       tiengVietHaTinh = tiengVietHaTinh.replace(
         new RegExp(`(?<=^|\\s)${key}(?=$|\\s)`, 'gu'),
-        hatinhMap[key]
+        mapNguoc[key]
       );
     }
     setTiengViet(tiengVietHaTinh);
