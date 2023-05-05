@@ -24,6 +24,14 @@ function App() {
   return (
     <>
       <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <div>
         <div>
           <label>Tiếng Việt</label>
         </div>
@@ -33,7 +41,7 @@ function App() {
           onChange={(e) => {
             setTiengViet(e.target.value);
           }}
-          style={{width: '100%'}}
+          style={{ width: '100%' }}
         ></textarea>
       </div>
       <button onClick={chui}>Chửi</button>
@@ -41,7 +49,7 @@ function App() {
         <div>
           <label>Tiếng Nghệ Tĩnh</label>
         </div>
-        <textarea rows={10} value={hatinh}  style={{width: '100%'}}></textarea>
+        <textarea rows={10} value={hatinh} style={{ width: '100%' }}></textarea>
       </div>
     </>
   );
