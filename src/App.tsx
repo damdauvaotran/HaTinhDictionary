@@ -42,7 +42,7 @@ function App() {
       for (const key of keyList) {
         if (unTranslatedString.includes(key)) {
           const translatedString = unTranslatedString.replace(
-            new RegExp(`(?<=^|\\s)${key}(?=$|\\s)`, 'gu'),
+            new RegExp(`(?<=^|\\s|\\W)${key}(?=$|\\s|\\W)`, 'gu'),
             mapLanguage[key]
           );
           unTranslatedWords = [];
